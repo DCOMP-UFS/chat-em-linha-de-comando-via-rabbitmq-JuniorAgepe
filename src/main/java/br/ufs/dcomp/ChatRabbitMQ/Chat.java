@@ -2,6 +2,8 @@ package br.ufs.dcomp.ChatRabbitMQ;
 
 import com.rabbitmq.client.*;
 
+import java.util.Scanner;
+
 import java.io.IOException;
 
 import java.io.IOException;
@@ -39,6 +41,7 @@ public class Chat {
      Scanner sc = new Scanner(System.in);
      System.out.print("User: ");
      String QUEUE_Send = "";
+     String mensagem = "";
      String QUEUE_NAME = sc.nextLine();
      QUEUE_NAME = "@" + QUEUE_NAME; 
      channel.queueDeclare(QUEUE_NAME, false,   false,     false,       null);
@@ -62,7 +65,8 @@ public class Chat {
          channelEnvia.queueDeclare(QUEUE_Send, false,   false,     false,       null);
       }
       else{
-        channelEnvia.basicPublish("", QUEUE_Send, null,  Inpt.getBytes("UTF-8"));
+        mensagem = horarioAtual() + " " + QUEUE_NAME + " diz: " + Inpt;
+        channelEnvia.basicPublish("", QUEUE_Send, null,  mensagem.getBytes("UTF-8"));
       }
       System.out.print(QUEUE_Send + " >>> ");
       Inpt = sc.nextLine();
