@@ -27,7 +27,7 @@ public class Chat {
   
   public static void main(String[] argv) throws Exception {
     ConnectionFactory factory = new ConnectionFactory();
-    factory.setHost("ec2-54-146-179-243.compute-1.amazonaws.com"); // Alterar
+    factory.setHost("ec2-52-73-164-223.compute-1.amazonaws.com"); // Alterar
     factory.setUsername("admin"); // Alterar
     factory.setPassword("password"); // Alterar
     factory.setVirtualHost("/");   
@@ -50,7 +50,7 @@ public class Chat {
         
         String message = new String(body, "UTF-8");
         System.out.println();
-        System.out.println(horarioAtual() + "Usuario " + " diz: " + message);
+        System.out.println(message);
         System.out.print(">>>");
                         //(deliveryTag,               multiple);
         //channel.basicAck(envelope.getDeliveryTag(), false);
