@@ -12,6 +12,10 @@ import java.time.LocalDate;
 
 import java.time.LocalTime;
 
+import java.io.*;
+
+import com.google.protobuf.util.JsonFormat;
+
 import java.time.format.DateTimeFormatter;
 
 public class Chat {
@@ -44,14 +48,25 @@ public class Chat {
     String usuarioGrupo = "";
     String mensagem = "";
     String QUEUE_NAME = sc.nextLine();
+    final String nomeUsuario = QUEUE_NAME;
     QUEUE_NAME = "@" + QUEUE_NAME; 
     channel.queueDeclare(QUEUE_NAME, false,   false,     false,       null);
     Consumer consumer = new DefaultConsumer(channel) {
       public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)           throws IOException {
         
-        String message = new String(body, "UTF-8");
+        //String message = new String(body, "UTF-8");
+        byte[] message = body;
+        Mensagem.MensagemUsuario mensagemUsuario = Mensagem.MensagemUsuario.parseFrom(message);
         System.out.println();
-        System.out.println(message);
+        if(mensagemUsuario.getGrupo().equals("")){
+          System.out.println(mensagemUsuario.getHora() + " " + mensagemUsuario.getNome() + " diz: " + mensagemUsuario.getMensagem() );
+        }
+        else{
+          if(!mensagemUsuario.getNome().equals("@" + nomeUsuario)){
+            System.out.println(mensagemUsuario.getHora() + " " + mensagemUsuario.getGrupo() + mensagemUsuario.getNome() + " diz: " + mensagemUsuario.getMensagem());
+          }
+          
+        }
         System.out.print(">>>");
                         //(deliveryTag,               multiple);
         //channel.basicAck(envelope.getDeliveryTag(), false);
@@ -92,14 +107,23 @@ public class Chat {
         }
       }
       else{
-        
+        Mensagem.MensagemUsuario.Builder builderMensagem = Mensagem.MensagemUsuario.newBuilder();
+        builderMensagem.setHora(horarioAtual());
+        builderMensagem.setNome(QUEUE_NAME);
+        builderMensagem.setMensagem(Inpt);
         if(QUEUE_Send.substring(0,1).equals("@")){
-          mensagem = horarioAtual() + " " + QUEUE_NAME + " diz: " + Inpt;
-          channel.basicPublish("", QUEUE_Send, null,  mensagem.getBytes("UTF-8")); 
+          
+          builderMensagem.setGrupo("");
+          Mensagem.MensagemUsuario mensagemUsuario = builderMensagem.build();
+          byte[] buffer = mensagemUsuario.toByteArray();
+          channel.basicPublish("", QUEUE_Send, null,  buffer); 
         }
         else{
-          mensagem = horarioAtual() + " " + QUEUE_NAME + QUEUE_Send + " diz: " + Inpt;
-          channel.basicPublish(QUEUE_Send.substring(1), QUEUE_NAME , null,  mensagem.getBytes("UTF-8")); 
+          
+          builderMensagem.setGrupo(QUEUE_Send);
+          Mensagem.MensagemUsuario mensagemUsuario = builderMensagem.build();
+          byte[] buffer = mensagemUsuario.toByteArray();
+          channel.basicPublish(QUEUE_Send.substring(1), QUEUE_NAME , null, buffer); 
         }
         
       }
