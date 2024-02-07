@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package CorpoMensagem;
+
+option java_package = "br.ufs.dcomp.ChatRabbitMQ";
+option java_outer_classname = "Mensagem";
+
+message MensagemUsuario {
+           string hora = 1;
+           string nome = 2;
+           string grupo = 3;
+           string mensagem = 4;
+}
