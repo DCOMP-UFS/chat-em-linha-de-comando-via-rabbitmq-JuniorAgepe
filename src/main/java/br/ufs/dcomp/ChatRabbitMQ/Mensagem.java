@@ -19,52 +19,99 @@ public final class Mensagem {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string hora = 1;</code>
+     * <pre>
+     * Nome do emissor
+     * </pre>
+     *
+     * <code>string emissor = 1;</code>
+     * @return The emissor.
+     */
+    java.lang.String getEmissor();
+    /**
+     * <pre>
+     * Nome do emissor
+     * </pre>
+     *
+     * <code>string emissor = 1;</code>
+     * @return The bytes for emissor.
+     */
+    com.google.protobuf.ByteString
+        getEmissorBytes();
+
+    /**
+     * <pre>
+     * Data de envio
+     * </pre>
+     *
+     * <code>string data = 2;</code>
+     * @return The data.
+     */
+    java.lang.String getData();
+    /**
+     * <pre>
+     * Data de envio
+     * </pre>
+     *
+     * <code>string data = 2;</code>
+     * @return The bytes for data.
+     */
+    com.google.protobuf.ByteString
+        getDataBytes();
+
+    /**
+     * <pre>
+     * Hora de envio
+     * </pre>
+     *
+     * <code>string hora = 3;</code>
      * @return The hora.
      */
     java.lang.String getHora();
     /**
-     * <code>string hora = 1;</code>
+     * <pre>
+     * Hora de envio
+     * </pre>
+     *
+     * <code>string hora = 3;</code>
      * @return The bytes for hora.
      */
     com.google.protobuf.ByteString
         getHoraBytes();
 
     /**
-     * <code>string nome = 2;</code>
-     * @return The nome.
-     */
-    java.lang.String getNome();
-    /**
-     * <code>string nome = 2;</code>
-     * @return The bytes for nome.
-     */
-    com.google.protobuf.ByteString
-        getNomeBytes();
-
-    /**
-     * <code>string grupo = 3;</code>
+     * <pre>
+     * Informa o nome do grupo, se a mensagem for para um grupo
+     * </pre>
+     *
+     * <code>string grupo = 4;</code>
      * @return The grupo.
      */
     java.lang.String getGrupo();
     /**
-     * <code>string grupo = 3;</code>
+     * <pre>
+     * Informa o nome do grupo, se a mensagem for para um grupo
+     * </pre>
+     *
+     * <code>string grupo = 4;</code>
      * @return The bytes for grupo.
      */
     com.google.protobuf.ByteString
         getGrupoBytes();
 
     /**
-     * <code>string mensagem = 4;</code>
-     * @return The mensagem.
+     * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+     * @return Whether the conteudo field is set.
      */
-    java.lang.String getMensagem();
+    boolean hasConteudo();
     /**
-     * <code>string mensagem = 4;</code>
-     * @return The bytes for mensagem.
+     * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+     * @return The conteudo.
      */
-    com.google.protobuf.ByteString
-        getMensagemBytes();
+    br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo getConteudo();
+    /**
+     * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+     */
+    br.ufs.dcomp.ChatRabbitMQ.Mensagem.ConteudoOrBuilder getConteudoOrBuilder();
   }
   /**
    * Protobuf type {@code CorpoMensagem.MensagemUsuario}
@@ -79,10 +126,10 @@ public final class Mensagem {
       super(builder);
     }
     private MensagemUsuario() {
+      emissor_ = "";
+      data_ = "";
       hora_ = "";
-      nome_ = "";
       grupo_ = "";
-      mensagem_ = "";
     }
 
     @java.lang.Override
@@ -118,25 +165,38 @@ public final class Mensagem {
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              hora_ = s;
+              emissor_ = s;
               break;
             }
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              nome_ = s;
+              data_ = s;
               break;
             }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              grupo_ = s;
+              hora_ = s;
               break;
             }
             case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              mensagem_ = s;
+              grupo_ = s;
+              break;
+            }
+            case 42: {
+              br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.Builder subBuilder = null;
+              if (conteudo_ != null) {
+                subBuilder = conteudo_.toBuilder();
+              }
+              conteudo_ = input.readMessage(br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(conteudo_);
+                conteudo_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -171,10 +231,106 @@ public final class Mensagem {
               br.ufs.dcomp.ChatRabbitMQ.Mensagem.MensagemUsuario.class, br.ufs.dcomp.ChatRabbitMQ.Mensagem.MensagemUsuario.Builder.class);
     }
 
-    public static final int HORA_FIELD_NUMBER = 1;
+    public static final int EMISSOR_FIELD_NUMBER = 1;
+    private volatile java.lang.Object emissor_;
+    /**
+     * <pre>
+     * Nome do emissor
+     * </pre>
+     *
+     * <code>string emissor = 1;</code>
+     * @return The emissor.
+     */
+    @java.lang.Override
+    public java.lang.String getEmissor() {
+      java.lang.Object ref = emissor_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        emissor_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Nome do emissor
+     * </pre>
+     *
+     * <code>string emissor = 1;</code>
+     * @return The bytes for emissor.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getEmissorBytes() {
+      java.lang.Object ref = emissor_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        emissor_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DATA_FIELD_NUMBER = 2;
+    private volatile java.lang.Object data_;
+    /**
+     * <pre>
+     * Data de envio
+     * </pre>
+     *
+     * <code>string data = 2;</code>
+     * @return The data.
+     */
+    @java.lang.Override
+    public java.lang.String getData() {
+      java.lang.Object ref = data_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        data_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Data de envio
+     * </pre>
+     *
+     * <code>string data = 2;</code>
+     * @return The bytes for data.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getDataBytes() {
+      java.lang.Object ref = data_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        data_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int HORA_FIELD_NUMBER = 3;
     private volatile java.lang.Object hora_;
     /**
-     * <code>string hora = 1;</code>
+     * <pre>
+     * Hora de envio
+     * </pre>
+     *
+     * <code>string hora = 3;</code>
      * @return The hora.
      */
     @java.lang.Override
@@ -191,7 +347,11 @@ public final class Mensagem {
       }
     }
     /**
-     * <code>string hora = 1;</code>
+     * <pre>
+     * Hora de envio
+     * </pre>
+     *
+     * <code>string hora = 3;</code>
      * @return The bytes for hora.
      */
     @java.lang.Override
@@ -209,48 +369,14 @@ public final class Mensagem {
       }
     }
 
-    public static final int NOME_FIELD_NUMBER = 2;
-    private volatile java.lang.Object nome_;
-    /**
-     * <code>string nome = 2;</code>
-     * @return The nome.
-     */
-    @java.lang.Override
-    public java.lang.String getNome() {
-      java.lang.Object ref = nome_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        nome_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string nome = 2;</code>
-     * @return The bytes for nome.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getNomeBytes() {
-      java.lang.Object ref = nome_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        nome_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int GRUPO_FIELD_NUMBER = 3;
+    public static final int GRUPO_FIELD_NUMBER = 4;
     private volatile java.lang.Object grupo_;
     /**
-     * <code>string grupo = 3;</code>
+     * <pre>
+     * Informa o nome do grupo, se a mensagem for para um grupo
+     * </pre>
+     *
+     * <code>string grupo = 4;</code>
      * @return The grupo.
      */
     @java.lang.Override
@@ -267,7 +393,11 @@ public final class Mensagem {
       }
     }
     /**
-     * <code>string grupo = 3;</code>
+     * <pre>
+     * Informa o nome do grupo, se a mensagem for para um grupo
+     * </pre>
+     *
+     * <code>string grupo = 4;</code>
      * @return The bytes for grupo.
      */
     @java.lang.Override
@@ -285,42 +415,30 @@ public final class Mensagem {
       }
     }
 
-    public static final int MENSAGEM_FIELD_NUMBER = 4;
-    private volatile java.lang.Object mensagem_;
+    public static final int CONTEUDO_FIELD_NUMBER = 5;
+    private br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo conteudo_;
     /**
-     * <code>string mensagem = 4;</code>
-     * @return The mensagem.
+     * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+     * @return Whether the conteudo field is set.
      */
     @java.lang.Override
-    public java.lang.String getMensagem() {
-      java.lang.Object ref = mensagem_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        mensagem_ = s;
-        return s;
-      }
+    public boolean hasConteudo() {
+      return conteudo_ != null;
     }
     /**
-     * <code>string mensagem = 4;</code>
-     * @return The bytes for mensagem.
+     * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+     * @return The conteudo.
      */
     @java.lang.Override
-    public com.google.protobuf.ByteString
-        getMensagemBytes() {
-      java.lang.Object ref = mensagem_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        mensagem_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo getConteudo() {
+      return conteudo_ == null ? br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.getDefaultInstance() : conteudo_;
+    }
+    /**
+     * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+     */
+    @java.lang.Override
+    public br.ufs.dcomp.ChatRabbitMQ.Mensagem.ConteudoOrBuilder getConteudoOrBuilder() {
+      return getConteudo();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -337,17 +455,20 @@ public final class Mensagem {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getHoraBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, hora_);
+      if (!getEmissorBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, emissor_);
       }
-      if (!getNomeBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nome_);
+      if (!getDataBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, data_);
+      }
+      if (!getHoraBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, hora_);
       }
       if (!getGrupoBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, grupo_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, grupo_);
       }
-      if (!getMensagemBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, mensagem_);
+      if (conteudo_ != null) {
+        output.writeMessage(5, getConteudo());
       }
       unknownFields.writeTo(output);
     }
@@ -358,17 +479,21 @@ public final class Mensagem {
       if (size != -1) return size;
 
       size = 0;
-      if (!getHoraBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, hora_);
+      if (!getEmissorBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, emissor_);
       }
-      if (!getNomeBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nome_);
+      if (!getDataBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, data_);
+      }
+      if (!getHoraBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, hora_);
       }
       if (!getGrupoBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, grupo_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, grupo_);
       }
-      if (!getMensagemBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, mensagem_);
+      if (conteudo_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getConteudo());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -385,14 +510,19 @@ public final class Mensagem {
       }
       br.ufs.dcomp.ChatRabbitMQ.Mensagem.MensagemUsuario other = (br.ufs.dcomp.ChatRabbitMQ.Mensagem.MensagemUsuario) obj;
 
+      if (!getEmissor()
+          .equals(other.getEmissor())) return false;
+      if (!getData()
+          .equals(other.getData())) return false;
       if (!getHora()
           .equals(other.getHora())) return false;
-      if (!getNome()
-          .equals(other.getNome())) return false;
       if (!getGrupo()
           .equals(other.getGrupo())) return false;
-      if (!getMensagem()
-          .equals(other.getMensagem())) return false;
+      if (hasConteudo() != other.hasConteudo()) return false;
+      if (hasConteudo()) {
+        if (!getConteudo()
+            .equals(other.getConteudo())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -404,14 +534,18 @@ public final class Mensagem {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + EMISSOR_FIELD_NUMBER;
+      hash = (53 * hash) + getEmissor().hashCode();
+      hash = (37 * hash) + DATA_FIELD_NUMBER;
+      hash = (53 * hash) + getData().hashCode();
       hash = (37 * hash) + HORA_FIELD_NUMBER;
       hash = (53 * hash) + getHora().hashCode();
-      hash = (37 * hash) + NOME_FIELD_NUMBER;
-      hash = (53 * hash) + getNome().hashCode();
       hash = (37 * hash) + GRUPO_FIELD_NUMBER;
       hash = (53 * hash) + getGrupo().hashCode();
-      hash = (37 * hash) + MENSAGEM_FIELD_NUMBER;
-      hash = (53 * hash) + getMensagem().hashCode();
+      if (hasConteudo()) {
+        hash = (37 * hash) + CONTEUDO_FIELD_NUMBER;
+        hash = (53 * hash) + getConteudo().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -545,14 +679,20 @@ public final class Mensagem {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        hora_ = "";
+        emissor_ = "";
 
-        nome_ = "";
+        data_ = "";
+
+        hora_ = "";
 
         grupo_ = "";
 
-        mensagem_ = "";
-
+        if (conteudoBuilder_ == null) {
+          conteudo_ = null;
+        } else {
+          conteudo_ = null;
+          conteudoBuilder_ = null;
+        }
         return this;
       }
 
@@ -579,10 +719,15 @@ public final class Mensagem {
       @java.lang.Override
       public br.ufs.dcomp.ChatRabbitMQ.Mensagem.MensagemUsuario buildPartial() {
         br.ufs.dcomp.ChatRabbitMQ.Mensagem.MensagemUsuario result = new br.ufs.dcomp.ChatRabbitMQ.Mensagem.MensagemUsuario(this);
+        result.emissor_ = emissor_;
+        result.data_ = data_;
         result.hora_ = hora_;
-        result.nome_ = nome_;
         result.grupo_ = grupo_;
-        result.mensagem_ = mensagem_;
+        if (conteudoBuilder_ == null) {
+          result.conteudo_ = conteudo_;
+        } else {
+          result.conteudo_ = conteudoBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -631,21 +776,24 @@ public final class Mensagem {
 
       public Builder mergeFrom(br.ufs.dcomp.ChatRabbitMQ.Mensagem.MensagemUsuario other) {
         if (other == br.ufs.dcomp.ChatRabbitMQ.Mensagem.MensagemUsuario.getDefaultInstance()) return this;
-        if (!other.getHora().isEmpty()) {
-          hora_ = other.hora_;
+        if (!other.getEmissor().isEmpty()) {
+          emissor_ = other.emissor_;
           onChanged();
         }
-        if (!other.getNome().isEmpty()) {
-          nome_ = other.nome_;
+        if (!other.getData().isEmpty()) {
+          data_ = other.data_;
+          onChanged();
+        }
+        if (!other.getHora().isEmpty()) {
+          hora_ = other.hora_;
           onChanged();
         }
         if (!other.getGrupo().isEmpty()) {
           grupo_ = other.grupo_;
           onChanged();
         }
-        if (!other.getMensagem().isEmpty()) {
-          mensagem_ = other.mensagem_;
-          onChanged();
+        if (other.hasConteudo()) {
+          mergeConteudo(other.getConteudo());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -676,9 +824,205 @@ public final class Mensagem {
         return this;
       }
 
+      private java.lang.Object emissor_ = "";
+      /**
+       * <pre>
+       * Nome do emissor
+       * </pre>
+       *
+       * <code>string emissor = 1;</code>
+       * @return The emissor.
+       */
+      public java.lang.String getEmissor() {
+        java.lang.Object ref = emissor_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          emissor_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Nome do emissor
+       * </pre>
+       *
+       * <code>string emissor = 1;</code>
+       * @return The bytes for emissor.
+       */
+      public com.google.protobuf.ByteString
+          getEmissorBytes() {
+        java.lang.Object ref = emissor_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          emissor_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Nome do emissor
+       * </pre>
+       *
+       * <code>string emissor = 1;</code>
+       * @param value The emissor to set.
+       * @return This builder for chaining.
+       */
+      public Builder setEmissor(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        emissor_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Nome do emissor
+       * </pre>
+       *
+       * <code>string emissor = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearEmissor() {
+        
+        emissor_ = getDefaultInstance().getEmissor();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Nome do emissor
+       * </pre>
+       *
+       * <code>string emissor = 1;</code>
+       * @param value The bytes for emissor to set.
+       * @return This builder for chaining.
+       */
+      public Builder setEmissorBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        emissor_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object data_ = "";
+      /**
+       * <pre>
+       * Data de envio
+       * </pre>
+       *
+       * <code>string data = 2;</code>
+       * @return The data.
+       */
+      public java.lang.String getData() {
+        java.lang.Object ref = data_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          data_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Data de envio
+       * </pre>
+       *
+       * <code>string data = 2;</code>
+       * @return The bytes for data.
+       */
+      public com.google.protobuf.ByteString
+          getDataBytes() {
+        java.lang.Object ref = data_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          data_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Data de envio
+       * </pre>
+       *
+       * <code>string data = 2;</code>
+       * @param value The data to set.
+       * @return This builder for chaining.
+       */
+      public Builder setData(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        data_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Data de envio
+       * </pre>
+       *
+       * <code>string data = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearData() {
+        
+        data_ = getDefaultInstance().getData();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Data de envio
+       * </pre>
+       *
+       * <code>string data = 2;</code>
+       * @param value The bytes for data to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDataBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        data_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object hora_ = "";
       /**
-       * <code>string hora = 1;</code>
+       * <pre>
+       * Hora de envio
+       * </pre>
+       *
+       * <code>string hora = 3;</code>
        * @return The hora.
        */
       public java.lang.String getHora() {
@@ -694,7 +1038,11 @@ public final class Mensagem {
         }
       }
       /**
-       * <code>string hora = 1;</code>
+       * <pre>
+       * Hora de envio
+       * </pre>
+       *
+       * <code>string hora = 3;</code>
        * @return The bytes for hora.
        */
       public com.google.protobuf.ByteString
@@ -711,7 +1059,11 @@ public final class Mensagem {
         }
       }
       /**
-       * <code>string hora = 1;</code>
+       * <pre>
+       * Hora de envio
+       * </pre>
+       *
+       * <code>string hora = 3;</code>
        * @param value The hora to set.
        * @return This builder for chaining.
        */
@@ -726,7 +1078,11 @@ public final class Mensagem {
         return this;
       }
       /**
-       * <code>string hora = 1;</code>
+       * <pre>
+       * Hora de envio
+       * </pre>
+       *
+       * <code>string hora = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearHora() {
@@ -736,7 +1092,11 @@ public final class Mensagem {
         return this;
       }
       /**
-       * <code>string hora = 1;</code>
+       * <pre>
+       * Hora de envio
+       * </pre>
+       *
+       * <code>string hora = 3;</code>
        * @param value The bytes for hora to set.
        * @return This builder for chaining.
        */
@@ -752,85 +1112,13 @@ public final class Mensagem {
         return this;
       }
 
-      private java.lang.Object nome_ = "";
-      /**
-       * <code>string nome = 2;</code>
-       * @return The nome.
-       */
-      public java.lang.String getNome() {
-        java.lang.Object ref = nome_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          nome_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string nome = 2;</code>
-       * @return The bytes for nome.
-       */
-      public com.google.protobuf.ByteString
-          getNomeBytes() {
-        java.lang.Object ref = nome_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          nome_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string nome = 2;</code>
-       * @param value The nome to set.
-       * @return This builder for chaining.
-       */
-      public Builder setNome(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        nome_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string nome = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearNome() {
-        
-        nome_ = getDefaultInstance().getNome();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string nome = 2;</code>
-       * @param value The bytes for nome to set.
-       * @return This builder for chaining.
-       */
-      public Builder setNomeBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        nome_ = value;
-        onChanged();
-        return this;
-      }
-
       private java.lang.Object grupo_ = "";
       /**
-       * <code>string grupo = 3;</code>
+       * <pre>
+       * Informa o nome do grupo, se a mensagem for para um grupo
+       * </pre>
+       *
+       * <code>string grupo = 4;</code>
        * @return The grupo.
        */
       public java.lang.String getGrupo() {
@@ -846,7 +1134,11 @@ public final class Mensagem {
         }
       }
       /**
-       * <code>string grupo = 3;</code>
+       * <pre>
+       * Informa o nome do grupo, se a mensagem for para um grupo
+       * </pre>
+       *
+       * <code>string grupo = 4;</code>
        * @return The bytes for grupo.
        */
       public com.google.protobuf.ByteString
@@ -863,7 +1155,11 @@ public final class Mensagem {
         }
       }
       /**
-       * <code>string grupo = 3;</code>
+       * <pre>
+       * Informa o nome do grupo, se a mensagem for para um grupo
+       * </pre>
+       *
+       * <code>string grupo = 4;</code>
        * @param value The grupo to set.
        * @return This builder for chaining.
        */
@@ -878,7 +1174,11 @@ public final class Mensagem {
         return this;
       }
       /**
-       * <code>string grupo = 3;</code>
+       * <pre>
+       * Informa o nome do grupo, se a mensagem for para um grupo
+       * </pre>
+       *
+       * <code>string grupo = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearGrupo() {
@@ -888,7 +1188,11 @@ public final class Mensagem {
         return this;
       }
       /**
-       * <code>string grupo = 3;</code>
+       * <pre>
+       * Informa o nome do grupo, se a mensagem for para um grupo
+       * </pre>
+       *
+       * <code>string grupo = 4;</code>
        * @param value The bytes for grupo to set.
        * @return This builder for chaining.
        */
@@ -904,80 +1208,123 @@ public final class Mensagem {
         return this;
       }
 
-      private java.lang.Object mensagem_ = "";
+      private br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo conteudo_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo, br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.Builder, br.ufs.dcomp.ChatRabbitMQ.Mensagem.ConteudoOrBuilder> conteudoBuilder_;
       /**
-       * <code>string mensagem = 4;</code>
-       * @return The mensagem.
+       * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+       * @return Whether the conteudo field is set.
        */
-      public java.lang.String getMensagem() {
-        java.lang.Object ref = mensagem_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          mensagem_ = s;
-          return s;
+      public boolean hasConteudo() {
+        return conteudoBuilder_ != null || conteudo_ != null;
+      }
+      /**
+       * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+       * @return The conteudo.
+       */
+      public br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo getConteudo() {
+        if (conteudoBuilder_ == null) {
+          return conteudo_ == null ? br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.getDefaultInstance() : conteudo_;
         } else {
-          return (java.lang.String) ref;
+          return conteudoBuilder_.getMessage();
         }
       }
       /**
-       * <code>string mensagem = 4;</code>
-       * @return The bytes for mensagem.
+       * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
        */
-      public com.google.protobuf.ByteString
-          getMensagemBytes() {
-        java.lang.Object ref = mensagem_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          mensagem_ = b;
-          return b;
+      public Builder setConteudo(br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo value) {
+        if (conteudoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          conteudo_ = value;
+          onChanged();
         } else {
-          return (com.google.protobuf.ByteString) ref;
+          conteudoBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+       */
+      public Builder setConteudo(
+          br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.Builder builderForValue) {
+        if (conteudoBuilder_ == null) {
+          conteudo_ = builderForValue.build();
+          onChanged();
+        } else {
+          conteudoBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+       */
+      public Builder mergeConteudo(br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo value) {
+        if (conteudoBuilder_ == null) {
+          if (conteudo_ != null) {
+            conteudo_ =
+              br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.newBuilder(conteudo_).mergeFrom(value).buildPartial();
+          } else {
+            conteudo_ = value;
+          }
+          onChanged();
+        } else {
+          conteudoBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+       */
+      public Builder clearConteudo() {
+        if (conteudoBuilder_ == null) {
+          conteudo_ = null;
+          onChanged();
+        } else {
+          conteudo_ = null;
+          conteudoBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+       */
+      public br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.Builder getConteudoBuilder() {
+        
+        onChanged();
+        return getConteudoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
+       */
+      public br.ufs.dcomp.ChatRabbitMQ.Mensagem.ConteudoOrBuilder getConteudoOrBuilder() {
+        if (conteudoBuilder_ != null) {
+          return conteudoBuilder_.getMessageOrBuilder();
+        } else {
+          return conteudo_ == null ?
+              br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.getDefaultInstance() : conteudo_;
         }
       }
       /**
-       * <code>string mensagem = 4;</code>
-       * @param value The mensagem to set.
-       * @return This builder for chaining.
+       * <code>.CorpoMensagem.Conteudo conteudo = 5;</code>
        */
-      public Builder setMensagem(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        mensagem_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string mensagem = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearMensagem() {
-        
-        mensagem_ = getDefaultInstance().getMensagem();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string mensagem = 4;</code>
-       * @param value The bytes for mensagem to set.
-       * @return This builder for chaining.
-       */
-      public Builder setMensagemBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        mensagem_ = value;
-        onChanged();
-        return this;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo, br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.Builder, br.ufs.dcomp.ChatRabbitMQ.Mensagem.ConteudoOrBuilder> 
+          getConteudoFieldBuilder() {
+        if (conteudoBuilder_ == null) {
+          conteudoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo, br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.Builder, br.ufs.dcomp.ChatRabbitMQ.Mensagem.ConteudoOrBuilder>(
+                  getConteudo(),
+                  getParentForChildren(),
+                  isClean());
+          conteudo_ = null;
+        }
+        return conteudoBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1032,11 +1379,900 @@ public final class Mensagem {
 
   }
 
+  public interface ConteudoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:CorpoMensagem.Conteudo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * Tipo do conteúdo no padrão de tipos MIME. Exemplos: "text/plain", "image/png" 
+     * </pre>
+     *
+     * <code>string tipo = 1;</code>
+     * @return The tipo.
+     */
+    java.lang.String getTipo();
+    /**
+     * <pre>
+     * Tipo do conteúdo no padrão de tipos MIME. Exemplos: "text/plain", "image/png" 
+     * </pre>
+     *
+     * <code>string tipo = 1;</code>
+     * @return The bytes for tipo.
+     */
+    com.google.protobuf.ByteString
+        getTipoBytes();
+
+    /**
+     * <pre>
+     * Sequência de bytes que compõe o corpo da mensagem
+     * </pre>
+     *
+     * <code>bytes corpo = 2;</code>
+     * @return The corpo.
+     */
+    com.google.protobuf.ByteString getCorpo();
+
+    /**
+     * <pre>
+     * Nome do conteúdo, se existente. Exemplos: "logo_ufs.png", "index.html"
+     * </pre>
+     *
+     * <code>string nome = 3;</code>
+     * @return The nome.
+     */
+    java.lang.String getNome();
+    /**
+     * <pre>
+     * Nome do conteúdo, se existente. Exemplos: "logo_ufs.png", "index.html"
+     * </pre>
+     *
+     * <code>string nome = 3;</code>
+     * @return The bytes for nome.
+     */
+    com.google.protobuf.ByteString
+        getNomeBytes();
+  }
+  /**
+   * Protobuf type {@code CorpoMensagem.Conteudo}
+   */
+  public static final class Conteudo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:CorpoMensagem.Conteudo)
+      ConteudoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use Conteudo.newBuilder() to construct.
+    private Conteudo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Conteudo() {
+      tipo_ = "";
+      corpo_ = com.google.protobuf.ByteString.EMPTY;
+      nome_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Conteudo();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Conteudo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              tipo_ = s;
+              break;
+            }
+            case 18: {
+
+              corpo_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              nome_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return br.ufs.dcomp.ChatRabbitMQ.Mensagem.internal_static_CorpoMensagem_Conteudo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return br.ufs.dcomp.ChatRabbitMQ.Mensagem.internal_static_CorpoMensagem_Conteudo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.class, br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.Builder.class);
+    }
+
+    public static final int TIPO_FIELD_NUMBER = 1;
+    private volatile java.lang.Object tipo_;
+    /**
+     * <pre>
+     * Tipo do conteúdo no padrão de tipos MIME. Exemplos: "text/plain", "image/png" 
+     * </pre>
+     *
+     * <code>string tipo = 1;</code>
+     * @return The tipo.
+     */
+    @java.lang.Override
+    public java.lang.String getTipo() {
+      java.lang.Object ref = tipo_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        tipo_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Tipo do conteúdo no padrão de tipos MIME. Exemplos: "text/plain", "image/png" 
+     * </pre>
+     *
+     * <code>string tipo = 1;</code>
+     * @return The bytes for tipo.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getTipoBytes() {
+      java.lang.Object ref = tipo_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tipo_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CORPO_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString corpo_;
+    /**
+     * <pre>
+     * Sequência de bytes que compõe o corpo da mensagem
+     * </pre>
+     *
+     * <code>bytes corpo = 2;</code>
+     * @return The corpo.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString getCorpo() {
+      return corpo_;
+    }
+
+    public static final int NOME_FIELD_NUMBER = 3;
+    private volatile java.lang.Object nome_;
+    /**
+     * <pre>
+     * Nome do conteúdo, se existente. Exemplos: "logo_ufs.png", "index.html"
+     * </pre>
+     *
+     * <code>string nome = 3;</code>
+     * @return The nome.
+     */
+    @java.lang.Override
+    public java.lang.String getNome() {
+      java.lang.Object ref = nome_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        nome_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Nome do conteúdo, se existente. Exemplos: "logo_ufs.png", "index.html"
+     * </pre>
+     *
+     * <code>string nome = 3;</code>
+     * @return The bytes for nome.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getNomeBytes() {
+      java.lang.Object ref = nome_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nome_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getTipoBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, tipo_);
+      }
+      if (!corpo_.isEmpty()) {
+        output.writeBytes(2, corpo_);
+      }
+      if (!getNomeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, nome_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getTipoBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, tipo_);
+      }
+      if (!corpo_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, corpo_);
+      }
+      if (!getNomeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, nome_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo)) {
+        return super.equals(obj);
+      }
+      br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo other = (br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo) obj;
+
+      if (!getTipo()
+          .equals(other.getTipo())) return false;
+      if (!getCorpo()
+          .equals(other.getCorpo())) return false;
+      if (!getNome()
+          .equals(other.getNome())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + TIPO_FIELD_NUMBER;
+      hash = (53 * hash) + getTipo().hashCode();
+      hash = (37 * hash) + CORPO_FIELD_NUMBER;
+      hash = (53 * hash) + getCorpo().hashCode();
+      hash = (37 * hash) + NOME_FIELD_NUMBER;
+      hash = (53 * hash) + getNome().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CorpoMensagem.Conteudo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:CorpoMensagem.Conteudo)
+        br.ufs.dcomp.ChatRabbitMQ.Mensagem.ConteudoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return br.ufs.dcomp.ChatRabbitMQ.Mensagem.internal_static_CorpoMensagem_Conteudo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return br.ufs.dcomp.ChatRabbitMQ.Mensagem.internal_static_CorpoMensagem_Conteudo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.class, br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.Builder.class);
+      }
+
+      // Construct using br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        tipo_ = "";
+
+        corpo_ = com.google.protobuf.ByteString.EMPTY;
+
+        nome_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return br.ufs.dcomp.ChatRabbitMQ.Mensagem.internal_static_CorpoMensagem_Conteudo_descriptor;
+      }
+
+      @java.lang.Override
+      public br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo getDefaultInstanceForType() {
+        return br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo build() {
+        br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo buildPartial() {
+        br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo result = new br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo(this);
+        result.tipo_ = tipo_;
+        result.corpo_ = corpo_;
+        result.nome_ = nome_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo) {
+          return mergeFrom((br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo other) {
+        if (other == br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo.getDefaultInstance()) return this;
+        if (!other.getTipo().isEmpty()) {
+          tipo_ = other.tipo_;
+          onChanged();
+        }
+        if (other.getCorpo() != com.google.protobuf.ByteString.EMPTY) {
+          setCorpo(other.getCorpo());
+        }
+        if (!other.getNome().isEmpty()) {
+          nome_ = other.nome_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object tipo_ = "";
+      /**
+       * <pre>
+       * Tipo do conteúdo no padrão de tipos MIME. Exemplos: "text/plain", "image/png" 
+       * </pre>
+       *
+       * <code>string tipo = 1;</code>
+       * @return The tipo.
+       */
+      public java.lang.String getTipo() {
+        java.lang.Object ref = tipo_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tipo_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Tipo do conteúdo no padrão de tipos MIME. Exemplos: "text/plain", "image/png" 
+       * </pre>
+       *
+       * <code>string tipo = 1;</code>
+       * @return The bytes for tipo.
+       */
+      public com.google.protobuf.ByteString
+          getTipoBytes() {
+        java.lang.Object ref = tipo_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tipo_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Tipo do conteúdo no padrão de tipos MIME. Exemplos: "text/plain", "image/png" 
+       * </pre>
+       *
+       * <code>string tipo = 1;</code>
+       * @param value The tipo to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTipo(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        tipo_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Tipo do conteúdo no padrão de tipos MIME. Exemplos: "text/plain", "image/png" 
+       * </pre>
+       *
+       * <code>string tipo = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTipo() {
+        
+        tipo_ = getDefaultInstance().getTipo();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Tipo do conteúdo no padrão de tipos MIME. Exemplos: "text/plain", "image/png" 
+       * </pre>
+       *
+       * <code>string tipo = 1;</code>
+       * @param value The bytes for tipo to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTipoBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        tipo_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString corpo_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <pre>
+       * Sequência de bytes que compõe o corpo da mensagem
+       * </pre>
+       *
+       * <code>bytes corpo = 2;</code>
+       * @return The corpo.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString getCorpo() {
+        return corpo_;
+      }
+      /**
+       * <pre>
+       * Sequência de bytes que compõe o corpo da mensagem
+       * </pre>
+       *
+       * <code>bytes corpo = 2;</code>
+       * @param value The corpo to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCorpo(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        corpo_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Sequência de bytes que compõe o corpo da mensagem
+       * </pre>
+       *
+       * <code>bytes corpo = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCorpo() {
+        
+        corpo_ = getDefaultInstance().getCorpo();
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object nome_ = "";
+      /**
+       * <pre>
+       * Nome do conteúdo, se existente. Exemplos: "logo_ufs.png", "index.html"
+       * </pre>
+       *
+       * <code>string nome = 3;</code>
+       * @return The nome.
+       */
+      public java.lang.String getNome() {
+        java.lang.Object ref = nome_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          nome_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Nome do conteúdo, se existente. Exemplos: "logo_ufs.png", "index.html"
+       * </pre>
+       *
+       * <code>string nome = 3;</code>
+       * @return The bytes for nome.
+       */
+      public com.google.protobuf.ByteString
+          getNomeBytes() {
+        java.lang.Object ref = nome_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nome_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Nome do conteúdo, se existente. Exemplos: "logo_ufs.png", "index.html"
+       * </pre>
+       *
+       * <code>string nome = 3;</code>
+       * @param value The nome to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNome(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        nome_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Nome do conteúdo, se existente. Exemplos: "logo_ufs.png", "index.html"
+       * </pre>
+       *
+       * <code>string nome = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearNome() {
+        
+        nome_ = getDefaultInstance().getNome();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Nome do conteúdo, se existente. Exemplos: "logo_ufs.png", "index.html"
+       * </pre>
+       *
+       * <code>string nome = 3;</code>
+       * @param value The bytes for nome to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNomeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        nome_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:CorpoMensagem.Conteudo)
+    }
+
+    // @@protoc_insertion_point(class_scope:CorpoMensagem.Conteudo)
+    private static final br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo();
+    }
+
+    public static br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Conteudo>
+        PARSER = new com.google.protobuf.AbstractParser<Conteudo>() {
+      @java.lang.Override
+      public Conteudo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Conteudo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Conteudo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Conteudo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public br.ufs.dcomp.ChatRabbitMQ.Mensagem.Conteudo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_CorpoMensagem_MensagemUsuario_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_CorpoMensagem_MensagemUsuario_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_CorpoMensagem_Conteudo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_CorpoMensagem_Conteudo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1047,10 +2283,12 @@ public final class Mensagem {
   static {
     java.lang.String[] descriptorData = {
       "\n\"src/main/java/proto/mensagem.proto\022\rCo" +
-      "rpoMensagem\"N\n\017MensagemUsuario\022\014\n\004hora\030\001" +
-      " \001(\t\022\014\n\004nome\030\002 \001(\t\022\r\n\005grupo\030\003 \001(\t\022\020\n\010men" +
-      "sagem\030\004 \001(\tB%\n\031br.ufs.dcomp.ChatRabbitMQ" +
-      "B\010Mensagemb\006proto3"
+      "rpoMensagem\"x\n\017MensagemUsuario\022\017\n\007emisso" +
+      "r\030\001 \001(\t\022\014\n\004data\030\002 \001(\t\022\014\n\004hora\030\003 \001(\t\022\r\n\005g" +
+      "rupo\030\004 \001(\t\022)\n\010conteudo\030\005 \001(\0132\027.CorpoMens" +
+      "agem.Conteudo\"5\n\010Conteudo\022\014\n\004tipo\030\001 \001(\t\022" +
+      "\r\n\005corpo\030\002 \001(\014\022\014\n\004nome\030\003 \001(\tB%\n\031br.ufs.d" +
+      "comp.ChatRabbitMQB\010Mensagemb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1061,7 +2299,13 @@ public final class Mensagem {
     internal_static_CorpoMensagem_MensagemUsuario_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CorpoMensagem_MensagemUsuario_descriptor,
-        new java.lang.String[] { "Hora", "Nome", "Grupo", "Mensagem", });
+        new java.lang.String[] { "Emissor", "Data", "Hora", "Grupo", "Conteudo", });
+    internal_static_CorpoMensagem_Conteudo_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_CorpoMensagem_Conteudo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_CorpoMensagem_Conteudo_descriptor,
+        new java.lang.String[] { "Tipo", "Corpo", "Nome", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
