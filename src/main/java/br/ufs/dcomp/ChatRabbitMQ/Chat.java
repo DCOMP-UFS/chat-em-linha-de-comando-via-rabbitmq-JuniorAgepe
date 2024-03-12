@@ -24,9 +24,89 @@ import com.google.protobuf.util.JsonFormat;
 
 import java.time.format.DateTimeFormatter;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import org.json.JSONArray;
+import org.json.JSONObject;
 public class Chat {
 
-  
+public static String listaGrupos(String apiUrl, String username, String password, String usuario) {
+        HttpClient client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
+                .build();
+        
+        HttpRequest request = HttpRequest.newBuilder()
+                  .uri(URI.create(apiUrl +"bindings"))
+                  .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString((username + ":" + password).getBytes()))
+                  .GET()
+                  .build();
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                String retorno =  response.body();
+                JSONArray jsonArray = new JSONArray(retorno);
+                String grupos = "";
+                for (int i = 0; i < jsonArray.length(); i++) {
+                  JSONObject jsonObject = jsonArray.getJSONObject(i);
+                  
+                  if(!jsonObject.getString("source").equals("")){
+                    if(jsonObject.getString("destination").equals(usuario)){
+                      if(i != jsonArray.length() - 1){
+                        grupos += jsonObject.getString("source") + ", ";
+                      }
+                      else{
+                        grupos += jsonObject.getString("source");
+                      }
+                    }
+                  }
+                }
+                return grupos;
+            } else {
+                return "Erro ao fazer a requisição: " + response.statusCode() + " - " + response.body();
+            }
+        } catch (Exception e) {
+            return "Erro ao enviar a requisição: " + e.getMessage();
+        }
+    }
+
+  public static String listaUsuariosGrupos(String apiUrl, String username, String password, String group) {
+        HttpClient client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
+                .build();
+        
+        HttpRequest request = HttpRequest.newBuilder()
+                  .uri(URI.create(apiUrl + "exchanges/%2F/"+ group + "/bindings/source"))
+                  .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString((username + ":" + password).getBytes()))
+                  .GET()
+                  .build();;
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                String retorno =  response.body();
+                JSONArray jsonArray = new JSONArray(retorno);
+                String destination = "";
+                for (int i = 0; i < jsonArray.length(); i++) {
+                  JSONObject jsonObject = jsonArray.getJSONObject(i);
+                  
+                  if(i == 0){
+                    destination = jsonObject.getString("destination");
+                  }
+                  else{
+                    destination += " " + jsonObject.getString("destination");
+                  }
+                }
+                return destination;
+            } else {
+                return "Erro ao fazer a requisição: " + response.statusCode() + " - " + response.body();
+            }
+        } catch (Exception e) {
+            return "Erro ao enviar a requisição: " + e.getMessage();
+        }
+    }
   
   private static String horarioAtual(){
     LocalTime horaAtual = LocalTime.now();
@@ -69,13 +149,15 @@ public class Chat {
     factory.setHost("ec2-52-73-164-223.compute-1.amazonaws.com");
     factory.setUsername("admin");
     factory.setPassword("password");
-    factory.setVirtualHost("/");   
+    factory.setVirtualHost("/");
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
     final Channel channel2 = connection.createChannel();
     String Usuario = "";
     String Remetente = "";
-    
+    String usuarioRabbit = "admin";
+    String senhaRabbit = "password";
+    String apiUrl = "http://52.73.164.223:15672/api/";
     Scanner sc = new Scanner(System.in);
     System.out.print("User: ");
     String QUEUE_Send = "";
@@ -195,9 +277,18 @@ public class Chat {
           channel.queueUnbind(usuarioGrupo, grupo , ""); 
         }
         else if(textos[0].equals("!removeGroup")){  //Excluir um Grupo
-          grupo = textos[0];
+          grupo = textos[1];
           channel.exchangeDelete(grupo);
         }
+        else if(textos[0].equals("!listUsers")){  //Listar Usuários do Grupo
+          grupo = textos[1];
+          String response = listaUsuariosGrupos(apiUrl, usuarioRabbit, senhaRabbit, grupo);
+          System.out.println(response);
+        }
+        else if(textos[0].equals("!listGroups")){  //Listar Usuários do Grupo
+          String response = listaGrupos(apiUrl, usuarioRabbit, senhaRabbit, QUEUE_NAME);
+          System.out.println(response);
+        } 
       }
       else{
         Mensagem.MensagemUsuario.Builder builderMensagem = Mensagem.MensagemUsuario.newBuilder();
