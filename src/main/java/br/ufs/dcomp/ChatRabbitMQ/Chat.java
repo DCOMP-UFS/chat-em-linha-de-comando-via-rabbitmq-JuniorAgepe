@@ -30,11 +30,13 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.time.Duration;
 public class Chat {
 
 public static String listaGrupos(String apiUrl, String username, String password, String usuario) {
         HttpClient client = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_1_1)
+                .connectTimeout(Duration.ofSeconds(10))
                 .build();
         
         HttpRequest request = HttpRequest.newBuilder()
@@ -75,16 +77,17 @@ public static String listaGrupos(String apiUrl, String username, String password
   public static String listaUsuariosGrupos(String apiUrl, String username, String password, String group) {
         HttpClient client = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_1_1)
+                .connectTimeout(Duration.ofSeconds(10))
                 .build();
         
         HttpRequest request = HttpRequest.newBuilder()
                   .uri(URI.create(apiUrl + "exchanges/%2F/"+ group + "/bindings/source"))
                   .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString((username + ":" + password).getBytes()))
                   .GET()
-                  .build();;
+                  .build();
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
+            System.out.println(response);
             if (response.statusCode() == 200) {
                 String retorno =  response.body();
                 JSONArray jsonArray = new JSONArray(retorno);
@@ -146,7 +149,8 @@ public static String listaGrupos(String apiUrl, String username, String password
   
   public static void main(String[] argv) throws Exception {
     ConnectionFactory factory = new ConnectionFactory();
-    factory.setHost("ec2-52-73-164-223.compute-1.amazonaws.com");
+    //factory.setHost("ec2-3-210-53-94.compute-1.amazonaws.com");
+    factory.setHost("Teste-ed4bec25de79f707.elb.us-east-1.amazonaws.com");
     factory.setUsername("admin");
     factory.setPassword("password");
     factory.setVirtualHost("/");
@@ -157,7 +161,7 @@ public static String listaGrupos(String apiUrl, String username, String password
     String Remetente = "";
     String usuarioRabbit = "admin";
     String senhaRabbit = "password";
-    String apiUrl = "http://52.73.164.223:15672/api/";
+    String apiUrl = "http://SDHTTP-1846640378.us-east-1.elb.amazonaws.com:80/api/";
     Scanner sc = new Scanner(System.in);
     System.out.print("User: ");
     String QUEUE_Send = "";
