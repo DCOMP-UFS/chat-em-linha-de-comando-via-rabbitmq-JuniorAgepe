@@ -87,7 +87,6 @@ public static String listaGrupos(String apiUrl, String username, String password
                   .build();
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response);
             if (response.statusCode() == 200) {
                 String retorno =  response.body();
                 JSONArray jsonArray = new JSONArray(retorno);
